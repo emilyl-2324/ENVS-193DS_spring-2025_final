@@ -109,9 +109,21 @@ ggplot(data = sst_clean_abbr,
       group = year))+
   geom_point() +
   geom_line(size = 0.7) + 
-  labs(x = "month",
+  labs(x = "Month",
        y = "Mean Monthly Sea Surface Temperature (°C)"
-  ) + 
-  theme(legend.position = "none")
+  ) +
+  theme(panel.border = element_rect(color = "black", fill = NA, linewidth = 0.7)) +
+#manually assign color to each water year  
+ scale_color_manual(values = c(
+  "2018" = "#99d8c9", 
+  "2019" = "#66c2a4", 
+  "2020" = "#41ae76", 
+  "2021" = "#238b45", 
+  "2022" = "#006d2c", 
+  "2023" = "#00441b")
+) + 
+  theme(panel.background = element_rect(color = "white", fill = "white"), #white panel background 
+    legend.position = c(0.11, 0.73), #legend position to top right 
+    plot.title.position = "plot") #align title with plot border 
 ```
 
