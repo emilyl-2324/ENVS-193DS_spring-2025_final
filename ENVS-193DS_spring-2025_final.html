@@ -133,12 +133,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Problem 1</h1>
 <section id="a.-transparent-statistical-methods-8-points" class="level2">
 <h2 class="anchored" data-anchor-id="a.-transparent-statistical-methods-8-points">a. Transparent statistical methods (8 points)</h2>
-<p><em>What statistical tests did your co-worker use? Clearly connect the test to the part that you are addressing (e.g.&nbsp;“In part 1, they used _______. In part 2, they used _______.”).</em> In part 1, they used a person’s r test, since the study is finding the correlation between two variables. In part 2, they used an ANOVA test since the study is comparing the means of two or more groups (the test compares the mean nitrogen load from 5 different sources).</p>
+<p><em>What statistical tests did your co-worker use? Clearly connect the test to the part that you are addressing (e.g.&nbsp;“In part 1, they used _______. In part 2, they used _______.”).</em></p>
+<p>In part 1, they used a person’s r test, since the study is finding the correlation between two variables. In part 2, they used an ANOVA test since the study is comparing the means of two or more groups (the test compares the mean nitrogen load from 5 different sources).</p>
 </section>
 <section id="b.-more-information-needed-8-points" class="level2">
 <h2 class="anchored" data-anchor-id="b.-more-information-needed-8-points">b. More information needed (8 points)</h2>
 <p><em>The test in part 2 seems familiar to you, but you think there’s more that your co-worker needs to do to provide more context for the results. List 2 additional tests and/or pieces of information that should be included, and explain why those tests and/or pieces of information would add useful additional context.</em></p>
-<p><em>Be specific and use variables and/or statistics from the example.</em> One additional test is a test for normality, since ANOVA assumes the data is normally distributed. This can be done through a shapiro-wilk test for each of the sources of nitrogen load (urban land, atmospheric deposition, fertilizer, wastewater treatment, and grasslands). If test-statistics is close to 1, then the sample is normally distributed and if the sample doesn’t equal 1, then the sample is not normally distributed.</p>
+<p><em>Be specific and use variables and/or statistics from the example.</em></p>
+<p>One additional test is a test for normality, since ANOVA assumes the data is normally distributed. This can be done through a shapiro-wilk test for each of the sources of nitrogen load (urban land, atmospheric deposition, fertilizer, wastewater treatment, and grasslands). If test-statistics is close to 1, then the sample is normally distributed and if the sample doesn’t equal 1, then the sample is not normally distributed.</p>
 <p>Another test that should be done is the f-test, which tests for significance between groups, where the f-statistic is a ratio of two variances: the ms (mean square) among the group and the ms within the group. If the ms among groups is significantly larger than ms within groups, the f-stat is large and the null hypothesis should be rejected.</p>
 <p>possible tests: significance level. f-statistic. post hocs test. effective size.</p>
 </section>
@@ -178,13 +180,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_sample</span>(sst_clean, <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 3
-  year  month     mean_monthly_sst
-  &lt;fct&gt; &lt;ord&gt;                &lt;dbl&gt;
-1 2021  October               16.6
-2 2020  June                  15.9
-3 2022  May                   13.4
-4 2018  December              15.6
-5 2020  September             18.7</code></pre>
+  year  month    mean_monthly_sst
+  &lt;fct&gt; &lt;ord&gt;               &lt;dbl&gt;
+1 2018  February             14.3
+2 2021  August               17.7
+3 2019  February             14.1
+4 2022  December             14.8
+5 2023  December             16.1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sst_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">

@@ -24,13 +24,17 @@ library(lubridate)
 
 ## a. Transparent statistical methods (8 points)
 
-*What statistical tests did your co-worker use? Clearly connect the test to the part that you are addressing (e.g. “In part 1, they used \_\_\_\_\_\_\_. In part 2, they used \_\_\_\_\_\_\_.”).* In part 1, they used a person's r test, since the study is finding the correlation between two variables. In part 2, they used an ANOVA test since the study is comparing the means of two or more groups (the test compares the mean nitrogen load from 5 different sources).
+*What statistical tests did your co-worker use? Clearly connect the test to the part that you are addressing (e.g. “In part 1, they used \_\_\_\_\_\_\_. In part 2, they used \_\_\_\_\_\_\_.”).*
+
+In part 1, they used a person's r test, since the study is finding the correlation between two variables. In part 2, they used an ANOVA test since the study is comparing the means of two or more groups (the test compares the mean nitrogen load from 5 different sources).
 
 ## b. More information needed (8 points)
 
 *The test in part 2 seems familiar to you, but you think there’s more that your co-worker needs to do to provide more context for the results. List 2 additional tests and/or pieces of information that should be included, and explain why those tests and/or pieces of information would add useful additional context.*
 
-*Be specific and use variables and/or statistics from the example.* One additional test is a test for normality, since ANOVA assumes the data is normally distributed. This can be done through a shapiro-wilk test for each of the sources of nitrogen load (urban land, atmospheric deposition, fertilizer, wastewater treatment, and grasslands). If test-statistics is close to 1, then the sample is normally distributed and if the sample doesn't equal 1, then the sample is not normally distributed.
+*Be specific and use variables and/or statistics from the example.* 
+
+One additional test is a test for normality, since ANOVA assumes the data is normally distributed. This can be done through a shapiro-wilk test for each of the sources of nitrogen load (urban land, atmospheric deposition, fertilizer, wastewater treatment, and grasslands). If test-statistics is close to 1, then the sample is normally distributed and if the sample doesn't equal 1, then the sample is not normally distributed.
 
 Another test that should be done is the f-test, which tests for significance between groups, where the f-statistic is a ratio of two variances: the ms (mean square) among the group and the ms within the group. If the ms among groups is significantly larger than ms within groups, the f-stat is large and the null hypothesis should be rejected.
 
