@@ -132,3 +132,5 @@ ggplot(data = sst_clean_abbr,
     legend.position = c(0.11, 0.73), #legend position to top right 
     plot.title.position = "plot") #align title with plot border 
 ```
+
+# Problem 3: 
