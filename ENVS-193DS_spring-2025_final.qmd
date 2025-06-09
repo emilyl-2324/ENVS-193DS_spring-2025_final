@@ -57,5 +57,10 @@ We found an effective size (n^2 = effective size) between sources (urban land, a
 We determined the group variances (F-test, F(among groups df, within groups df) = f-statistic, p = 0.02, a = significance level) of the average nitrogen load (in kg/year) between different sources (urban land, atmospheric deposition, fertilizer, wastewater treatment, and grasslands).
 
 # Problem 2. Data visualization (36 points)
+## a. 
+```{r data cleaning}
+sst <- read_csv("SST_update2023")
+
+```
 
 
