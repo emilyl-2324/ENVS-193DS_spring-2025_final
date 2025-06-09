@@ -73,6 +73,10 @@ sst_clean <- sst |>
   filter(year %in% c("2018", "2019", "2020", "2021", "2022", "2023")) |> 
   group_by(year, month) |> 
   summarize(mean_monthly_sst = mean(temp, na.rm = TRUE), .groups = "drop") |> 
-  mutate(month = month(month, label = TRUE, abbr = FALSE)) |> 
-  slice_sample(n = 5) 
+  mutate(month = month(month, label = TRUE, abbr = FALSE))
+
+slice_sample(sst_clean, n = 5)
+str(sst_clean)
 ```
+
+## b
