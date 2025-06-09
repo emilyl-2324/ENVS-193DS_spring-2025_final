@@ -15,7 +15,7 @@ library(janitor)
 
 ## a. Transparent statistical methods (8 points)
 *What statistical tests did your co-worker use? Clearly connect the test to the part that you are addressing (e.g. “In part 1, they used _______. In part 2, they used _______.”).*
-In part 1, they used a person's r test, since the study is finding the correlation between two variables. In part 2, they used an anova test since the study is comparing the means of two or more groups (the test compares the mean nitrogen load from 5 different sources). 
+In part 1, they used a person's r test, since the study is finding the correlation between two variables. In part 2, they used an ANOVA test since the study is comparing the means of two or more groups (the test compares the mean nitrogen load from 5 different sources). 
 
 ## b. More information needed (8 points)
 *The test in part 2 seems familiar to you, but you think there’s more that your co-worker needs to do to provide more context for the results. List 2 additional tests and/or pieces of information that should be included, and explain why those tests and/or pieces of information would add useful additional context.*
@@ -38,5 +38,23 @@ effective size.
 
 *Note that your co-worker didn’t include any information about the test statistic, distribution, etc., and that you only know the p-value. For any part that you do not know, list that part with text. For example, you could write something like: “… r = correlation coefficient, p = 0.03, a = significance level …”*
 
+*1) We rejected the null hypothesis that there is no correlation between distance from headwater (km) and annual total nitrogen load (kg year-1) (p = 0.03).*
+
+We found a specific type of relationship (Pearson's r = correlation coefficient, p = 0.03, a = significance level) between the distance from headwaters (in km) and the annual total nitrogen load (kg/year), where headwaters distance significantly predicted/had no correlation with annual total nitrogen load. 
+
+
+template: We found a strong negative (Pearson's r = -0.94) relationship between soil compaction and root length, where soil compaction significantly predicted root length 
+
+*2) We rejected the null hypothesis that there is no difference in average nitrogen load (kg year-1) between sources (urban land, atmospheric deposition, fertilizer, wastewater treatment, and grasslands) (p = 0.02).*
+
+template: (one-way ANOVA, F(among groups df, within groups df) = Fstatistic, p-value, alpha)
+writing ab anovas: p381
+summary template: p382
+
+We found an effective size (n^2 = effective size) between sources (urban land, atmospheric deposition, fertilizer, wastewater treatment, and grasslands) in mean nitrogen load (in kg/year) (F-test, F(among groups df, within groups df) = f-statistic, p = 0.02, a = significance level)
+
+We determined the group variances (F-test, F(among groups df, within groups df) = f-statistic, p = 0.02, a = significance level) of the average nitrogen load (in kg/year) between different sources (urban land, atmospheric deposition, fertilizer, wastewater treatment, and grasslands).
+
+# Problem 2. Data visualization (36 points)
 
 
