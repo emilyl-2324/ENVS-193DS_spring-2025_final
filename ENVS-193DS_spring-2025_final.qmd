@@ -10,6 +10,7 @@ github repo: https://github.com/emilyl-2324/ENVS-193DS_spring-2025_final.git
 library(tidyverse)
 library(janitor)
 library(dplyr)
+library(ggplot2)
 library(lubridate)
 ```
 
@@ -80,3 +81,37 @@ str(sst_clean)
 ```
 
 ## b
+```{r}
+sst_clean_abbr <- sst_clean |> 
+  mutate(month = case_when(
+    month == "January" ~ "Jan",
+    month == "February" ~ "Feb",
+    month == "March" ~ "Mar",
+    month == "April" ~ "Apr",
+    month == "May" ~ "May",
+    month == "June" ~ "Jun",
+    month == "July" ~ "Jul",
+    month == "August" ~ "Aug",
+    month == "September" ~ "Sep",
+    month == "October" ~ "Oct",
+    month == "November" ~ "Nov",
+    month == "December" ~ "Dec",
+    TRUE ~ month
+  )) |> 
+  mutate(month = fct_relevel(month, "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
+```
+
+```{r} 
+ggplot(data = sst_clean_abbr, 
+  aes(x = month,
+      y = mean_monthly_sst,
+      color = year,
+      group = year))+
+  geom_point() +
+  geom_line(size = 0.7) + 
+  labs(x = "month",
+       y = "Mean Monthly Sea Surface Temperature (°C)"
+  ) + 
+  theme(legend.position = "none")
+```
+
