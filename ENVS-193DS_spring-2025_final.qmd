@@ -18,6 +18,7 @@ library(janitor)
 library(dplyr)
 library(ggplot2)
 library(lubridate)
+library(DHARMa)
 ```
 
 # Problem 1
@@ -134,3 +135,84 @@ ggplot(data = sst_clean_abbr,
 ```
 
 # Problem 3: 
+## a. Response variable (2 points)
+*In 1-2 sentences, explain what the 1s and 0s mean in this data set biologically.*
+
+The 1s mean the nest is being occupied by a bird species and the 0s mean the nest isn't occupied by a bird species.
+
+## b. Purpose of study (2 points)
+*The authors compare nest box occupancy between 3 species: Swift Parrots, Common Starlings, and Tree Martins. In 1-2 sentences, explain the main difference between Swift Parrots and the other two species in the context of this study.*
+
+The purpose of the study is to find the relationship between the nest position (distance from forest edge) and non-target species exploitation of target-species nest boxes. The swift parrots are the target species and the common starlings and tree martins are non-target species. 
+
+## c. Difference in “seasons” (2 points)
+*The authors compare two years (that they refer to as “seasons”). In 1-2 sentences, define what those years/seasons are, and explain how they differ in the context of this study.*
+
+The authors compare the data between 2 seasons, which refers to the swift parrot breeding season (during summer) in 2016 and 2019. 
+
+## d. table: 
+*Make a table of all the models you will need to run. You will run 4 models: a null model, a saturated model, and two other models with different combinations of predictors. Your table should have 4 columns: (1) model number, (2) season, (3) distance to forest edge, and (4) model description.*
+
+| Model number | season | distance to forest edge | model description           |  
+|:------------:|:------:|:-----------------------:|:---------------------------:|
+| 1            |        |                         | null model (no predictors)  |
+| 2            |  X     |       X                 | all predictors (full model) | 
+| 3            |  X     |       X                 | season only                 |   
+| 4            |  X     |                         | distance only               | 
+
+## e. Run the models (8 points)
+*Write your code to run all your models. Do not display any output.*
+```{r}
+nest_data <- read_csv("occdist.csv")
+nest_data_clean <- nest_data |> #make an object called nest_clean
+  clean_names() |> #clean the names to get rid of "."
+  mutate(season = as.factor(season)) #make box_occupant a factor w 4 levels
+```
+
+```{r}
+
+model1 <-  glm(sp ~ 1, #null model #running a generalized linear model because the data is continuous against binary
+                   data = nest_data_clean,
+                   family = "binomial") #specifies a binary response variable (Swift Parrot occupancy in the nest boxes)
+
+model2 <-  glm(sp ~ season + edge_distance, #saturated model (season and distance)
+             data = nest_data_clean,
+             family = "binomial")
+
+model3 <- glm(sp ~ season, #season only
+            data = nest_data_clean,
+            family = "binomial")
+
+model4 <-  glm(sp ~ edge_distance, #distance only
+             data = nest_data_clean,
+             family = "binomial")
+
+```
+
+## f. Check the diagnostics
+
+```{r}
+# Simulate residuals for each model
+residual1 <- simulateResiduals(model1) #null
+residual2 <- simulateResiduals(model2) #saturated 
+residual3 <- simulateResiduals(model3) #season 
+residual4 <- simulateResiduals(model4) #distance 
+
+par(mfrow = c(2, 2)) #layout of plot
+
+#plot residuals
+
+plot(residual1, main = "Model 1, Null")
+```
+
+```{r}
+plot(residual2, main = "Model 2, Saturated")
+```
+
+```{r}
+plot(residual3, main = "Model 3, year only")
+```
+
+```{r}
+plot(residual4, main = "Model 4, distance only")
+```
