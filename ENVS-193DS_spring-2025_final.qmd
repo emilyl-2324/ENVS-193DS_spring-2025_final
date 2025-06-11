@@ -273,19 +273,20 @@ ggplot(model2_data, aes(x = x,
   theme(
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank(),
-    plot.title = element_text(face = "bold", size = 14),
-    axis.title = element_text(size = 12),
     legend.title = element_blank()
   ) + 
-   labs( #add abels 
+   labs( #add labels 
     x = "Distance to forest edge (meters)",
     y = "Probability of Swift Parrot occupancy",
-    title = "Predicted Swift Parrot Nest Box Occupancy by Season"
+    title = "Figure 2. Probability of Swift Parrot Occupancy\n vs. Distance to Forest Edge",
   ) 
 
 ```
 
+## i. Write a caption for your figure. (7 points)
+*Include a figure number, title, description of the figure, and data citation.*
 
+Figure 2. Predicted Swift Parrot Nest Box Occupancy vs. Distance to Forest Edge. Data from dataset (Stojanovic, D., Owens, G., Young, C.M., Alves, F. and Heinsohn, R. 2021). Each colored circle represents Swift Parrot presence or absence in a nest box, where 100% is present and 0% is absent. Colors represent the year of the breeding season (orange circles: data from 2016, teal circles: data from 2019).  
 
 
 
