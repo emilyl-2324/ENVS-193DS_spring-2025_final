@@ -17,8 +17,11 @@ library(tidyverse)
 library(janitor)
 library(dplyr)
 library(ggplot2)
+library(scales)
+library(ggeffects)
 library(lubridate)
 library(DHARMa)
+library(MuMIn)
 ```
 
 # Problem 1
@@ -216,3 +219,77 @@ plot(residual3, main = "Model 3, year only")
 ```{r}
 plot(residual4, main = "Model 4, distance only")
 ```
+
+## g. Select the best model (6 points)
+*Using Akaike’s Information Criterion (AIC) from the MuMIn package, choose the best model. In text, write what the best model was (i.e. “The best model as determined by Akaike’s Information Criterion (AIC)…”). Use the predictors and the response variable to describe the model, not the model number that you assigned.*
+```{r}
+AICc(model1,
+     model2,
+     model3,
+     model4) |> 
+  # arranging output in descending order of AIC
+  arrange(AICc)
+```
+The best model as determined by Akaike's Information Criterion was model depicting the relationship between swift parrot nest occupancy and the predictors: season and forest edge distance from nest. 
+
+## h. Visualize the model predictions (24 points)
+*Create a plot showing model predictions with 95% confidence intervals and the underlying data. Show and annotate all code. Show the output.*
+For full credit:
+
+make sure the x- and y-axis labels are written in full, take out the gridlines, use colors that are different from the default
+
+```{r}
+# Make predictions for all values of edge_distance, grouped by season
+model2_prediction <- ggpredict(model2, terms = c("edge_distance", "season"))
+
+# Convert to data frame and rename 'group' to 'Season' for clarity
+model2_data <- as.data.frame(model2_prediction) |> 
+  clean_names()
+
+ggplot(model2_data, aes(x = x, 
+                        y = predicted, 
+                        color = group, 
+                        fill = group)) +
+    geom_ribbon(data = model2_data, 
+                aes(ymin = conf_low,
+                     ymax = conf_high),
+                    alpha = 0.3,
+                    color = NA) +
+
+  # Prediction line and points
+  geom_line(size = 0.7) +
+  geom_point(size = 1.5) +
+  geom_jitter(data = nest_data_clean, #add underlying data points
+              aes(x = edge_distance, 
+                  y = sp, 
+                  color = season),
+              inherit.aes = FALSE,
+              shape = 1, size = 1.2, alpha = 0.4, height = 0.05) +
+#change colors
+  scale_color_manual(values = c("2016" = "#D95F02", "2019" = "#1B9E77")) +
+  scale_fill_manual(values = c("2016" = "#D95F02", "2019" = "#1B9E77")) +
+  scale_y_continuous(labels = percent_format(accuracy = 1)) + #make y-axis show percentages 
+  theme_bw() + #change theme and remove grid, bold title, remove legend title
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(face = "bold", size = 14),
+    axis.title = element_text(size = 12),
+    legend.title = element_blank()
+  ) + 
+   labs( #add abels 
+    x = "Distance to forest edge (meters)",
+    y = "Probability of Swift Parrot occupancy",
+    title = "Predicted Swift Parrot Nest Box Occupancy by Season"
+  ) 
+
+```
+
+
+
+
+
+
+
+
+
