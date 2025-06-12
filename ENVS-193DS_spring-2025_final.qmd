@@ -42,8 +42,6 @@ One additional test is a test for normality, since ANOVA assumes the data is nor
 
 Another test that should be done is the f-test, which tests for significance between groups, where the f-statistic is a ratio of two variances: the ms (mean square) among the group and the ms within the group. If the ms among groups is significantly larger than ms within groups, the f-stat is large and the null hypothesis should be rejected.
 
-possible tests: significance level. f-statistic. post hocs test. effective size.
-
 ## c. Suggestions for rewriting (20 points)
 
 *In 1-3 sentences, write new research statements to include relevant components from parts a-b and a full test summary in parentheses to be transparent about the statistical method.*
@@ -56,13 +54,9 @@ possible tests: significance level. f-statistic. post hocs test. effective size.
 
 We found a specific type of relationship (Pearson's r = correlation coefficient, p = 0.03, a = significance level) between the distance from headwaters (in km) and the annual total nitrogen load (kg/year), where headwaters distance significantly predicted/had no correlation with annual total nitrogen load.
 
-template: We found a strong negative (Pearson's r = -0.94) relationship between soil compaction and root length, where soil compaction significantly predicted root length
-
 *2) We rejected the null hypothesis that there is no difference in average nitrogen load (kg year-1) between sources (urban land, atmospheric deposition, fertilizer, wastewater treatment, and grasslands) (p = 0.02).*
 
-template: (one-way ANOVA, F(among groups df, within groups df) = Fstatistic, p-value, alpha) writing ab anovas: p381 summary template: p382
-
-We found an effective size (n\^2 = effective size) between sources (urban land, atmospheric deposition, fertilizer, wastewater treatment, and grasslands) in mean nitrogen load (in kg/year) (F-test, F(among groups df, within groups df) = f-statistic, p = 0.02, a = significance level)
+We found an effective size (n^2 = effective size) between sources (urban land, atmospheric deposition, fertilizer, wastewater treatment, and grasslands) in mean nitrogen load (in kg/year) (F-test, F(among groups df, within groups df) = f-statistic, p = 0.02, a = significance level)
 
 We determined the group variances (F-test, F(among groups df, within groups df) = f-statistic, p = 0.02, a = significance level) of the average nitrogen load (in kg/year) between different sources (urban land, atmospheric deposition, fertilizer, wastewater treatment, and grasslands).
 
@@ -71,29 +65,29 @@ We determined the group variances (F-test, F(among groups df, within groups df) 
 ## a.
 
 ```{r}
-sst <- read_csv("SST_update2023.csv")
+sst <- read_csv("SST_update2023.csv") #create new object and load in csv data
 
-sst_clean <- sst |> 
+sst_clean <- sst |> #create new object sst_clean
   mutate(
     date = ymd(date),  # ensure date is in Date format
-    year = year(date),
-    month = month(date)
+    year = year(date), #create column for year 
+    month = month(date) #create column for month 
   ) |> 
-  mutate(year = as_factor(year)) |> 
-  filter(year %in% c("2018", "2019", "2020", "2021", "2022", "2023")) |> 
-  group_by(year, month) |> 
-  summarize(mean_monthly_sst = mean(temp, na.rm = TRUE), .groups = "drop") |> 
-  mutate(month = month(month, label = TRUE, abbr = FALSE))
+  mutate(year = as_factor(year)) |>  #save year as a factor
+  filter(year %in% c("2018", "2019", "2020", "2021", "2022", "2023")) |> #only include years 2018-2023
+  group_by(year, month) |> #group by month and year
+  summarize(mean_monthly_sst = mean(temp, na.rm = TRUE), .groups = "drop") |> #find the mean monthly sst 
+  mutate(month = month(month, label = TRUE, abbr = FALSE)) 
 
-slice_sample(sst_clean, n = 5)
-str(sst_clean)
+slice_sample(sst_clean, n = 5) #show only 5 rows of data
+str(sst_clean) #display structure of the table 
 ```
 
 ## b
 
 ```{r}
-sst_clean_abbr <- sst_clean |> 
-  mutate(month = case_when(
+sst_clean_abbr <- sst_clean |> #create new object with months abbreviated
+  mutate(month = case_when( #change month name to abbreviations
     month == "January" ~ "Jan",
     month == "February" ~ "Feb",
     month == "March" ~ "Mar",
@@ -107,22 +101,22 @@ sst_clean_abbr <- sst_clean |>
     month == "November" ~ "Nov",
     month == "December" ~ "Dec",
     TRUE ~ month
-  )) |> 
+  )) |> #reoder months in order
   mutate(month = fct_relevel(month, "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
 ```
 
 ```{r}
-ggplot(data = sst_clean_abbr, 
-  aes(x = month,
+ggplot(data = sst_clean_abbr, #create plot using ggplot function 
+  aes(x = month, 
       y = mean_monthly_sst,
       color = year,
       group = year))+
-  geom_point() +
-  geom_line(size = 0.7) + 
-  labs(x = "Month",
-       y = "Mean Monthly Sea Surface Temperature (°C)"
+  geom_point() + #layer adds data points from sst_clean_abbr dataframe
+  geom_line(size = 0.7) +  #adds lines to connect data points
+  labs(x = "Month", #label x and y-axis
+       y = "Mean Monthly Sea Surface Temperature (°C)" 
   ) +
-  theme(panel.border = element_rect(color = "black", fill = NA, linewidth = 0.7)) +
+  theme(panel.border = element_rect(color = "black", fill = NA, linewidth = 0.7)) + #change theme and add panel border
 #manually assign color to each water year  
  scale_color_manual(values = c(
   "2018" = "#99d8c9", 
@@ -173,15 +167,15 @@ The authors compare the data between 2 seasons, which refers to the swift parrot
 *Write your code to run all your models. Do not display any output.*
 
 ```{r}
-nest_data <- read_csv("occdist.csv")
+nest_data <- read_csv("occdist.csv") #create object nest_data from loading in csv file
 nest_data_clean <- nest_data |> #make an object called nest_clean
   clean_names() |> #clean the names to get rid of "."
-  mutate(season = as.factor(season)) #make box_occupant a factor w 4 levels
+  mutate(season = as.factor(season)) #make season a factor
 ```
 
 ```{r}
 
-model1 <-  glm(sp ~ 1, #null model #running a generalized linear model because the data is continuous against binary
+model1 <-  glm(sp ~ 1, #null model (no predictors)
                    data = nest_data_clean,
                    family = "binomial") #specifies a binary response variable (Swift Parrot occupancy in the nest boxes)
 
@@ -212,19 +206,19 @@ par(mfrow = c(2, 2)) #layout of plot
 
 #plot residuals
 
-plot(residual1, main = "Model 1, Null")
+plot(residual1, main = "Model 1, Null") #plot residual of model1
 ```
 
 ```{r}
-plot(residual2, main = "Model 2, Saturated")
+plot(residual2, main = "Model 2, Saturated") #plot residual of model2
 ```
 
 ```{r}
-plot(residual3, main = "Model 3, year only")
+plot(residual3, main = "Model 3, year only") #plot residual of model3
 ```
 
 ```{r}
-plot(residual4, main = "Model 4, distance only")
+plot(residual4, main = "Model 4, distance only") #plot residual of model4
 ```
 
 ## g. Select the best model (6 points)
@@ -232,11 +226,11 @@ plot(residual4, main = "Model 4, distance only")
 *Using Akaike’s Information Criterion (AIC) from the MuMIn package, choose the best model. In text, write what the best model was (i.e. “The best model as determined by Akaike’s Information Criterion (AIC)…”). Use the predictors and the response variable to describe the model, not the model number that you assigned.*
 
 ```{r}
-AICc(model1,
+AICc(model1, #function calculates AIC of models 1-4
      model2,
      model3,
      model4) |> 
-  # arranging output in descending order of AIC
+  # arranging output in descending order of AIC 
   arrange(AICc)
 ```
 
@@ -252,31 +246,28 @@ make sure the x- and y-axis labels are written in full, take out the gridlines, 
 # Make predictions for all values of edge_distance, grouped by season
 model2_prediction <- ggpredict(model2, terms = c("edge_distance", "season"))
 
-# Convert to data frame and rename 'group' to 'Season' for clarity
+# Convert predictions to a data frame, where group refers to season
 model2_data <- as.data.frame(model2_prediction) |> 
   clean_names()
 
-ggplot(model2_data, aes(x = x, 
+ggplot(model2_data, aes(x = x,  #make ggplot using model2_data 
                         y = predicted, 
                         color = group, 
                         fill = group)) +
-    geom_ribbon(data = model2_data, 
+    geom_ribbon(data = model2_data, #add ribbon layer, showing the 95% confidence interval
                 aes(ymin = conf_low,
                      ymax = conf_high),
                     alpha = 0.3,
                     color = NA) +
-
-  # Prediction line and points
-  geom_line(size = 0.7) +
-  geom_point(size = 1.5) +
-  geom_jitter(data = nest_data_clean, #add underlying data points
+  geom_line(size = 0.7) + #layer adds lines connecting data points
+  geom_point(size = 1.5) + #adds data points
+  geom_jitter(data = nest_data_clean, #add underlying data points from nest_data_clean to show occupancy of swift parrots
               aes(x = edge_distance, 
                   y = sp, 
                   color = season),
               inherit.aes = FALSE,
               shape = 1, size = 1.2, alpha = 0.4, height = 0.05) +
-#change colors
-  scale_color_manual(values = c("2016" = "#D95F02", "2019" = "#1B9E77")) +
+  scale_color_manual(values = c("2016" = "#D95F02", "2019" = "#1B9E77")) + #manually change colors
   scale_fill_manual(values = c("2016" = "#D95F02", "2019" = "#1B9E77")) +
   scale_y_continuous(labels = percent_format(accuracy = 1)) + #make y-axis show percentages 
   theme_bw() + #change theme and remove grid, bold title, remove legend title
@@ -285,7 +276,7 @@ ggplot(model2_data, aes(x = x,
     panel.grid.minor = element_blank(),
     legend.title = element_blank()
   ) + 
-   labs( #add labels 
+   labs( #add labels for x, y-axis and title
     x = "Distance to forest edge (meters)",
     y = "Probability of Swift Parrot occupancy",
     title = "Figure 2. Probability of Swift Parrot Occupancy\n vs. Distance to Forest Edge",
