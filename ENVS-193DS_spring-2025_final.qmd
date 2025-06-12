@@ -302,14 +302,10 @@ ggpredict(model2, terms = c("edge_distance [900]", "season")) #predict occupancy
 ## k. Interpret your results (16 points)
 
 *Write 3-5 sentences summarizing what you found, making references to the figure you made in part h and the predictions you calculated in part j. Your summary should include your interpretation of:* 
-- the predicted probability of occupancy at the forest edge (0 m) and farther away from the forest edge (900 m) between seasons 
-- the relationship between distance from forest edge and probability of occupancy 
-- the biology behind the trends you found 
-- what explains the relationship between distance from forest edge and probability of Swift Parrot nest box occupancy?
 
-When the nest-boxes are placed closer to the forest edge, there is a higher probability of swift parrot occupancy in those nest boxes. Tnest box occupancy in 2019 was predicted to be 30% at 0 meters and 6% at 900 meters and in 2016, the nest box occupancy was predicted to be 48% at 0 meters and 12% at 900 meters. The model predictions suggest that 
+When the nest-boxes are placed closer to the forest edge, there is a higher probability of swift parrot occupancy in those nest boxes. The nest box occupancy in 2019 was predicted to be 30% at 0 meters and 6% at 900 meters and in 2016, the nest box occupancy was predicted to be 48% at 0 meters and 12% at 900 meters. 
 
-This makes sense biologically as swift parrots are drawn to flowering trees, which could be higher in abundance at the forest edges likely due to greater sunlight exposure. Addditionally, competition between non-target species can be a possible reason accounting for the overall decrease in nest-box occupancy probability in 2019 for both forest edges distances compared to 2016. Since swift parrots 
+This makes sense biologically as swift parrots are drawn to flowering trees, which could be higher in abundance at the forest edges likely due to greater sunlight exposure. Additionally, competition between non-target species can be a possible reason accounting for the overall decrease in nest-box occupancy probability in 2019 for both forest edges distances compared to 2016. Since swift parrots 
 
 # Problem 4: 
 
