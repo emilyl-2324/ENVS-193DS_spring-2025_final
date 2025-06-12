@@ -23,8 +23,11 @@ library(tidyverse)
 library(janitor)
 library(dplyr)
 library(ggplot2)
+library(scales)
+library(ggeffects)
 library(lubridate)
 library(DHARMa)
+library(MuMIn)
 ```
 
 # Data and file information
@@ -32,12 +35,13 @@ library(DHARMa)
 ```{r}
 ├───code.folder.envs193ds_final
 ├───data.folder.envs193ds_final
-└───ENVS-193DS_spring-2025_final_files
-    ├───figure-html
-    └───libs
-        ├───bootstrap
-        ├───clipboard
-        └───quarto-html
+├───ENVS-193DS_spring-2025_final_files
+│   ├───figure-html
+│   └───libs
+│       ├───bootstrap
+│       ├───clipboard
+│       └───quarto-html
+└───images
 ```
 
 # Rendered output
