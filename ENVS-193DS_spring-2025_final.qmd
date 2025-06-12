@@ -36,7 +36,7 @@ In part 1, they used a person's r test, since the study is finding the correlati
 
 *The test in part 2 seems familiar to you, but you think there’s more that your co-worker needs to do to provide more context for the results. List 2 additional tests and/or pieces of information that should be included, and explain why those tests and/or pieces of information would add useful additional context.*
 
-*Be specific and use variables and/or statistics from the example.* 
+*Be specific and use variables and/or statistics from the example.*
 
 One additional test is a test for normality, since ANOVA assumes the data is normally distributed. This can be done through a shapiro-wilk test for each of the sources of nitrogen load (urban land, atmospheric deposition, fertilizer, wastewater treatment, and grasslands). If test-statistics is close to 1, then the sample is normally distributed and if the sample doesn't equal 1, then the sample is not normally distributed.
 
@@ -137,34 +137,41 @@ ggplot(data = sst_clean_abbr,
     plot.title.position = "plot") #align title with plot border 
 ```
 
-# Problem 3: 
+# Problem 3:
+
 ## a. Response variable (2 points)
+
 *In 1-2 sentences, explain what the 1s and 0s mean in this data set biologically.*
 
 The 1s mean the nest is being occupied by a bird species and the 0s mean the nest isn't occupied by a bird species.
 
 ## b. Purpose of study (2 points)
+
 *The authors compare nest box occupancy between 3 species: Swift Parrots, Common Starlings, and Tree Martins. In 1-2 sentences, explain the main difference between Swift Parrots and the other two species in the context of this study.*
 
-The purpose of the study is to find the relationship between the nest position (distance from forest edge) and non-target species exploitation of target-species nest boxes. The swift parrots are the target species and the common starlings and tree martins are non-target species. 
+The purpose of the study is to find the relationship between the nest position (distance from forest edge) and non-target species exploitation of target-species nest boxes. The swift parrots are the target species and the common starlings and tree martins are non-target species.
 
 ## c. Difference in “seasons” (2 points)
+
 *The authors compare two years (that they refer to as “seasons”). In 1-2 sentences, define what those years/seasons are, and explain how they differ in the context of this study.*
 
-The authors compare the data between 2 seasons, which refers to the swift parrot breeding season (during summer) in 2016 and 2019. 
+The authors compare the data between 2 seasons, which refers to the swift parrot breeding season (during summer) in 2016 and 2019.
 
-## d. table: 
+## d. table:
+
 *Make a table of all the models you will need to run. You will run 4 models: a null model, a saturated model, and two other models with different combinations of predictors. Your table should have 4 columns: (1) model number, (2) season, (3) distance to forest edge, and (4) model description.*
 
-| Model number | season | distance to forest edge | model description           |  
-|:------------:|:------:|:-----------------------:|:---------------------------:|
-| 1            |        |                         | null model (no predictors)  |
-| 2            |  X     |       X                 | all predictors (full model) | 
-| 3            |  X     |       X                 | season only                 |   
-| 4            |  X     |                         | distance only               | 
+| Model number | season | distance to forest edge |      model description      |
+|:-------------:|:-------------:|:------------------:|:----------------------:|
+|      1       |        |                         | null model (no predictors)  |
+|      2       |   X    |            X            | all predictors (full model) |
+|      3       |   X    |            X            |         season only         |
+|      4       |   X    |                         |        distance only        |
 
 ## e. Run the models (8 points)
+
 *Write your code to run all your models. Do not display any output.*
+
 ```{r}
 nest_data <- read_csv("occdist.csv")
 nest_data_clean <- nest_data |> #make an object called nest_clean
@@ -221,7 +228,9 @@ plot(residual4, main = "Model 4, distance only")
 ```
 
 ## g. Select the best model (6 points)
+
 *Using Akaike’s Information Criterion (AIC) from the MuMIn package, choose the best model. In text, write what the best model was (i.e. “The best model as determined by Akaike’s Information Criterion (AIC)…”). Use the predictors and the response variable to describe the model, not the model number that you assigned.*
+
 ```{r}
 AICc(model1,
      model2,
@@ -230,11 +239,12 @@ AICc(model1,
   # arranging output in descending order of AIC
   arrange(AICc)
 ```
-The best model as determined by Akaike's Information Criterion was model depicting the relationship between swift parrot nest occupancy and the predictors: season and forest edge distance from nest. 
+
+The best model as determined by Akaike's Information Criterion was model depicting the relationship between swift parrot nest occupancy and the predictors: season and forest edge distance from nest.
 
 ## h. Visualize the model predictions (24 points)
-*Create a plot showing model predictions with 95% confidence intervals and the underlying data. Show and annotate all code. Show the output.*
-For full credit:
+
+*Create a plot showing model predictions with 95% confidence intervals and the underlying data. Show and annotate all code. Show the output.* For full credit:
 
 make sure the x- and y-axis labels are written in full, take out the gridlines, use colors that are different from the default
 
@@ -284,26 +294,46 @@ ggplot(model2_data, aes(x = x,
 ```
 
 ## i. Write a caption for your figure. (7 points)
+
 *Include a figure number, title, description of the figure, and data citation.*
 
-Figure 2. Predicted Swift Parrot Nest Box Occupancy vs. Distance to Forest Edge. Data from dataset (Stojanovic, D., Owens, G., Young, C.M., Alves, F. and Heinsohn, R. 2021). Each colored circle represents Swift Parrot presence or absence in a nest box, where 100% is present and 0% is absent. Colors represent the year of the breeding season (orange circles: data from 2016, teal circles: data from 2019).  
+Figure 2. Predicted Swift Parrot Nest Box Occupancy vs. Distance to Forest Edge. Data from dataset (Stojanovic, D., Owens, G., Young, C.M., Alves, F. and Heinsohn, R. 2021). Each colored circle represents Swift Parrot presence or absence in a nest box, where 100% is present and 0% is absent. Colors represent the year of the breeding season (orange circles: data from 2016, teal circles: data from 2019).
 
 ## j. Calculate model predictions (4 points)
+
 *Calculate the predicted probabilities of Swift Parrot nest box occupancy with 95% at 0 m from forest edge and 900 m from forest edge for each level in season. Show and annotate all code. Display the output.*
 
+```{r}
+ggpredict(model2, terms = c("edge_distance [0]", "season")) #predict occupancy probability at forest edge for both seasons
+ggpredict(model2, terms = c("edge_distance [900]", "season")) #predict occupancy probability 900ft from forest edge for both seasons
+```
+
+## k. Interpret your results (16 points)
+
+*Write 3-5 sentences summarizing what you found, making references to the figure you made in part h and the predictions you calculated in part j. Your summary should include your interpretation of:* 
+- the predicted probability of occupancy at the forest edge (0 m) and farther away from the forest edge (900 m) between seasons 
+- the relationship between distance from forest edge and probability of occupancy 
+- the biology behind the trends you found 
+- what explains the relationship between distance from forest edge and probability of Swift Parrot nest box occupancy?
+
+When the nest-boxes are placed closer to the forest edge, there is a higher probability of swift parrot occupancy in those nest boxes. Tnest box occupancy in 2019 was predicted to be 30% at 0 meters and 6% at 900 meters and in 2016, the nest box occupancy was predicted to be 48% at 0 meters and 12% at 900 meters. The model predictions suggest that 
+
+This makes sense biologically as swift parrots are drawn to flowering trees, which could be higher in abundance at the forest edges likely due to greater sunlight exposure. Addditionally, competition between non-target species can be a possible reason accounting for the overall decrease in nest-box occupancy probability in 2019 for both forest edges distances compared to 2016. Since swift parrots 
+
 # Problem 4: 
+
 ## a. Comparing visualizations (20 points)
+
 *Compare and contrast your affective visualization from Homework 3 and the exploratory visualizations you made for Homework 2. In 1-3 sentences each, explain:*
-How are the visualizations different from each other in the way you have represented your data?
-- What similarities do you see between all your visualizations?
-- What patterns (e.g. differences in means/counts/proportions/medians, trends through time, relationships between variables) do you see in each visualization? Are these different between visualizations? If so, why? If not, why not?
-- What kinds of feedback did you get during week 9 in workshop or from the instructors? How did you implement or try those suggestions? If you tried and kept those suggestions, explain how and why; if not, explain why not.
 
+The main difference between the exploratory data visualizations and the affective visualizations is the exploratory data were made using ggplot and depicted solely date while the affective visualization could be more abstract and include visual elements that aren't necessarily related to the data but can add to its visual appeal.
 
+Both visualizations depict the underlying data points. In the exploratory data visualization, observations can be seen on the ggplot as circles or data points In the affective visualization, each observation was drawn out as a music clef.
 
+It was difficult to notice trends from the exploratory data since there were only a handful of data points collected when I made the visualization. However, looking at the affective visual, you can notice that there is a higher average listening time on days with less than 7 hours of sleep compared to days with more than 7 hours of sleep. The trends are different since the affective visual is based on a data frame with more observations, which suggests that the data underlying the affective visualization is more reliable than that of the exploratory visual.
 
+I didn't really get suggestions to make significant changes to the affective visualization since all the comments stated something along the lines of "the visual was easy to understand".
 
+## b.
 
-
-
-
+![](images/envs-193dsphoto2.jpg)
