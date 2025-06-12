@@ -1,6 +1,6 @@
 ---
 title: "ENVS-193DS_spring-2025_final"
-name: "Emily Lombardi"
+author: "Emily Lombardi"
 date: 6/9/2025
 format: html
 editor: visual
@@ -149,7 +149,7 @@ The purpose of the study is to find the relationship between the nest position (
 
 *The authors compare two years (that they refer to as “seasons”). In 1-2 sentences, define what those years/seasons are, and explain how they differ in the context of this study.*
 
-The authors compare the data between 2 seasons, which refers to the swift parrot breeding season (during summer) in 2016 and 2019.
+The authors compare the data between 2 seasons, which refers to the swift parrot breeding season (during summer) in 2016 and 2019. These years differ since 2016 is the initial year where nest-boxes were deployed and in 2019 the boxes have remained in the same place since initially being deployed. 
 
 ## d. table:
 
@@ -159,8 +159,8 @@ The authors compare the data between 2 seasons, which refers to the swift parrot
 |:-------------:|:-------------:|:------------------:|:----------------------:|
 |      1       |        |                         | null model (no predictors)  |
 |      2       |   X    |            X            | all predictors (full model) |
-|      3       |   X    |            X            |         season only         |
-|      4       |   X    |                         |        distance only        |
+|      3       |   X    |                         |         season only         |
+|      4       |        |           X             |        distance only        |
 
 ## e. Run the models (8 points)
 
@@ -288,7 +288,7 @@ ggplot(model2_data, aes(x = x,  #make ggplot using model2_data
 
 *Include a figure number, title, description of the figure, and data citation.*
 
-Figure 2. Predicted Swift Parrot Nest Box Occupancy vs. Distance to Forest Edge. Data from dataset (Stojanovic, D., Owens, G., Young, C.M., Alves, F. and Heinsohn, R. 2021). Each colored circle represents Swift Parrot presence or absence in a nest box, where 100% is present and 0% is absent. Colors represent the year of the breeding season (orange circles: data from 2016, teal circles: data from 2019).
+Figure 2. Predicted Swift Parrot Nest Box Occupancy vs. Distance to Forest Edge. Data from dataset (Stojanovic, D., Owens, G., Young, C.M., Alves, F. and Heinsohn, R. 2021) DOI: https://doi.org/10.5061/dryad.83bk3j9sb. Each colored circle represents Swift Parrot presence or absence in a nest box, where 100% is present and 0% is absent. Colors represent the year of the breeding season (orange circles: data from 2016, teal circles: data from 2019). The lines represent the predictions for nest occupancy while the ribbons show the 95% confidence interval of the model predictions. 
 
 ## j. Calculate model predictions (4 points)
 
@@ -305,7 +305,7 @@ ggpredict(model2, terms = c("edge_distance [900]", "season")) #predict occupancy
 
 When the nest-boxes are placed closer to the forest edge, there is a higher probability of swift parrot occupancy in those nest boxes. The nest box occupancy in 2019 was predicted to be 30% at 0 meters and 6% at 900 meters and in 2016, the nest box occupancy was predicted to be 48% at 0 meters and 12% at 900 meters. 
 
-This makes sense biologically as swift parrots are drawn to flowering trees, which could be higher in abundance at the forest edges likely due to greater sunlight exposure. Additionally, competition between non-target species can be a possible reason accounting for the overall decrease in nest-box occupancy probability in 2019 for both forest edges distances compared to 2016. Since swift parrots 
+Biologically, this could be explained as swift parrots are drawn to flowering trees, which could be higher in abundance at the forest edges likely due to greater sunlight exposure. Additionally, competition between non-target species can be a possible reason accounting for the overall decrease in nest-box occupancy probability in 2019 for both forest edges distances compared to 2016. Since breeding seasons may differ between different species, non-target species can also inhabit nest-boxes after swift parrots leave their nesting sites. 
 
 # Problem 4: 
 
@@ -322,5 +322,7 @@ It was difficult to notice trends from the exploratory data since there were onl
 I didn't really get suggestions to make significant changes to the affective visualization since all the comments stated something along the lines of "the visual was easy to understand".
 
 ## b.
+
+Affective visual depicting mean spotify listening time vs. sleep quality. 
 
 ![](images/envs-193dsphoto2.jpg)

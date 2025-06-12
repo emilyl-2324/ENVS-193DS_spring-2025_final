@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Emily Lombardi">
 <meta name="dcterms.date" content="2025-06-09">
 
 <title>ENVS-193DS_spring-2025_final</title>
@@ -124,6 +125,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Emily Lombardi </p>
+          </div>
+  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
@@ -202,11 +209,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 5 × 3
   year  month    mean_monthly_sst
   &lt;fct&gt; &lt;ord&gt;               &lt;dbl&gt;
-1 2021  December             14.4
-2 2022  July                 17.0
-3 2022  December             14.8
-4 2019  August               17.0
-5 2022  February             14.1</code></pre>
+1 2020  December             14.5
+2 2022  November             15.0
+3 2023  January              14.0
+4 2019  April                13.7
+5 2023  December             16.1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sst_clean) <span class="co">#display structure of the table </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -287,7 +294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="c.-difference-in-seasons-2-points" class="level2">
 <h2 class="anchored" data-anchor-id="c.-difference-in-seasons-2-points">c.&nbsp;Difference in “seasons” (2 points)</h2>
 <p><em>The authors compare two years (that they refer to as “seasons”). In 1-2 sentences, define what those years/seasons are, and explain how they differ in the context of this study.</em></p>
-<p>The authors compare the data between 2 seasons, which refers to the swift parrot breeding season (during summer) in 2016 and 2019.</p>
+<p>The authors compare the data between 2 seasons, which refers to the swift parrot breeding season (during summer) in 2016 and 2019. These years differ since 2016 is the initial year where nest-boxes were deployed and in 2019 the boxes have remained in the same place since initially being deployed.</p>
 </section>
 <section id="d.-table" class="level2">
 <h2 class="anchored" data-anchor-id="d.-table">d.&nbsp;table:</h2>
@@ -323,13 +330,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td style="text-align: center;">3</td>
 <td style="text-align: center;">X</td>
-<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
 <td style="text-align: center;">season only</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">4</td>
-<td style="text-align: center;">X</td>
 <td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
 <td style="text-align: center;">distance only</td>
 </tr>
 </tbody>
@@ -490,7 +497,7 @@ model1  1 238.8318</code></pre>
 <section id="i.-write-a-caption-for-your-figure.-7-points" class="level2">
 <h2 class="anchored" data-anchor-id="i.-write-a-caption-for-your-figure.-7-points">i. Write a caption for your figure. (7 points)</h2>
 <p><em>Include a figure number, title, description of the figure, and data citation.</em></p>
-<p>Figure 2. Predicted Swift Parrot Nest Box Occupancy vs.&nbsp;Distance to Forest Edge. Data from dataset (Stojanovic, D., Owens, G., Young, C.M., Alves, F. and Heinsohn, R. 2021). Each colored circle represents Swift Parrot presence or absence in a nest box, where 100% is present and 0% is absent. Colors represent the year of the breeding season (orange circles: data from 2016, teal circles: data from 2019).</p>
+<p>Figure 2. Predicted Swift Parrot Nest Box Occupancy vs.&nbsp;Distance to Forest Edge. Data from dataset (Stojanovic, D., Owens, G., Young, C.M., Alves, F. and Heinsohn, R. 2021) DOI: https://doi.org/10.5061/dryad.83bk3j9sb. Each colored circle represents Swift Parrot presence or absence in a nest box, where 100% is present and 0% is absent. Colors represent the year of the breeding season (orange circles: data from 2016, teal circles: data from 2019). The lines represent the predictions for nest occupancy while the ribbons show the 95% confidence interval of the model predictions.</p>
 </section>
 <section id="j.-calculate-model-predictions-4-points" class="level2">
 <h2 class="anchored" data-anchor-id="j.-calculate-model-predictions-4-points">j. Calculate model predictions (4 points)</h2>
@@ -534,7 +541,7 @@ edge_distance | Predicted |     95% CI
 <h2 class="anchored" data-anchor-id="k.-interpret-your-results-16-points">k. Interpret your results (16 points)</h2>
 <p><em>Write 3-5 sentences summarizing what you found, making references to the figure you made in part h and the predictions you calculated in part j. Your summary should include your interpretation of:</em></p>
 <p>When the nest-boxes are placed closer to the forest edge, there is a higher probability of swift parrot occupancy in those nest boxes. The nest box occupancy in 2019 was predicted to be 30% at 0 meters and 6% at 900 meters and in 2016, the nest box occupancy was predicted to be 48% at 0 meters and 12% at 900 meters.</p>
-<p>This makes sense biologically as swift parrots are drawn to flowering trees, which could be higher in abundance at the forest edges likely due to greater sunlight exposure. Additionally, competition between non-target species can be a possible reason accounting for the overall decrease in nest-box occupancy probability in 2019 for both forest edges distances compared to 2016. Since swift parrots</p>
+<p>Biologically, this could be explained as swift parrots are drawn to flowering trees, which could be higher in abundance at the forest edges likely due to greater sunlight exposure. Additionally, competition between non-target species can be a possible reason accounting for the overall decrease in nest-box occupancy probability in 2019 for both forest edges distances compared to 2016. Since breeding seasons may differ between different species, non-target species can also inhabit nest-boxes after swift parrots leave their nesting sites.</p>
 </section>
 </section>
 <section id="problem-4" class="level1">
@@ -549,6 +556,7 @@ edge_distance | Predicted |     95% CI
 </section>
 <section id="b." class="level2">
 <h2 class="anchored" data-anchor-id="b.">b.</h2>
+<p>Affective visual depicting mean spotify listening time vs.&nbsp;sleep quality.</p>
 <p><img src="images/envs-193dsphoto2.jpg" class="img-fluid"></p>
 </section>
 </section>
